@@ -1,0 +1,18 @@
+
+'VBIDE.vbext_VBAMode
+'  vbext_vm_Run    = 0 ' The project is in run mode.
+'  vbext_vm_Break  = 1 ' The project is in break mode.
+'  vbext_vm_Design = 2 ' The project is in design mode.
+'End Enum
+
+Public Function IDEMode(vbInst As VBIDE.VBE) As Long 'VBIDE.vbext_VBAMode
+   If vbInst.CommandBars("Run").Controls("End").Enabled Then
+      If vbInst.CommandBars("Run").Controls("Break").Enabled Then
+         IDEMode = vbext_vm_Run
+      Else
+         IDEMode = vbext_vm_Break
+      End If
+   Else
+      IDEMode = vbext_vm_Design
+   End If
+End Function

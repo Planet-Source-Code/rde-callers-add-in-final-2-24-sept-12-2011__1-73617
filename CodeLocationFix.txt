@@ -1,0 +1,42 @@
+
+George Lissauer
+
+If a module contains a Declare statement that is split on multiple lines, the CodeLocation property of all the CodeModule's Members don't return the correct value, because the Declare is counted as a single line. For example, if you have the following module: 
+
+Declare Function WritePrivateProfileString Lib "kernel32" Alias _
+    "WritePrivateProfileStringA" (ByVal AppName$, ByVal KeyName$, _
+    ByVal KeyDefault$, ByVal FileName$) As Long
+Public MyVar As Long
+
+The CodeLocation property of the MyVar member returns the value 2, instead of 6. And all the other members that follow are affected in the same fashion. Therefore, if you use the CodeLocation return value as an argument to the CodeModule's Lines property to retrieve the text of the member, you'll get the wrong text.
+
+''''
+
+I haven't proofed this fix at all...
+
+i = 1
+Do While i < CodeLocation
+   If Right$(CodeModule.Lines(i, 1), 1) = "_" Then
+      CodeLocation = CodeLocation + 1
+   End If
+   i = i + 1
+Loop
+
+''''
+
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" _
+              (pDest As Any, pSrc As Any, ByVal lLenB As Long)
+i = 1
+Do While i < CodeLocation
+   If RightI(CodeModule.Lines(i, 1), 1) = 95% Then
+      CodeLocation = CodeLocation + 1
+   End If
+   i = i + 1
+Loop
+
+Function RightI(sStr As String, ByVal lRightPos As Long) As Integer
+    CopyMemory RightI, ByVal StrPtr(sStr) + LenB(sStr) - lRightPos - lRightPos, 2&
+End Property
+
+righti("abcdefg_",1)
+ 95 
