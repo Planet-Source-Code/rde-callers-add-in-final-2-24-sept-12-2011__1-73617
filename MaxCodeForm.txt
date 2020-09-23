@@ -1,0 +1,20 @@
+The VB IDE remembers most of the configuration settings that were active when you closed the previous session. However, the maximized status of child MDI windows (the code editor and the designer window) isn't remembered, and the IDE always starts with non-maximized windows. To have VB always start with maximized code and form windows you can follow this series of operations
+
+
+Run the RegEdit program 
+Locate the following registry key:
+HKEY_CURRENT_USER\Software\Microsoft\Visual Basic\6.0 
+Add the string value MDIMaximized and set its value to "1" 
+Alternatively, you can copy the following lines to Notepad and save them as a REG file (e.g. MDIMAX.REG), then double-click on the REG file to merge these lines in the Registry.
+
+
+
+--------------------------------------------------------------------------------
+
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Microsoft\Visual Basic\6.0]
+MDIMaximized=1
+
+--------------------------------------------------------------------------------
+Of course you can also prepare a similar .REG file that restores the default behavior, by using the "0" value instead of "1". 
